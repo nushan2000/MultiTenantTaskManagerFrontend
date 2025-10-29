@@ -1,46 +1,63 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Multi-Tenant Task Manager — Frontend
 
-## Available Scripts
+This repository contains the React + TypeScript frontend for the Multi-Tenant Task Manager application.
 
-In the project directory, you can run:
+Summary
+-------
+The frontend provides the user interface for tenant-aware task management, authentication, and tenant-specific theming. It was bootstrapped with Create React App (TypeScript template).
 
-### `npm start`
+Project layout (important files)
+--------------------------------
+- `src/` — application source code
+  - `api/` — backend API helpers
+  - `auth/` — authentication helpers and JWT handling
+  - `components/` — shared UI components (e.g., `NavBar`)
+  - `context/` — React contexts (AuthContext, TenantThemeContext)
+  - `pages/` — page components (Login, Signup, Tasks, Admin, Unauthorized)
+  - `routes/` — route guards (ProtectedRoute)
+  - `themes/` — tenant theme definitions
+  - `utils/` — tenant utilities
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Prerequisites
+-------------
+- Node.js (LTS recommended, 16+)
+- npm (or yarn)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Quick start
+-----------
+1. Install dependencies
 
-### `npm test`
+	npm install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Start the development server
 
-### `npm run build`
+	npm start
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+	By default the app serves at http://localhost:3000
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Build for production
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+	npm run build
 
-### `npm run eject`
+4. Run tests
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+	npm test
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Backend integration
+-------------------
+This frontend expects a backend API (the companion `MultiTenantTaskManagerBackend` project) to be running. The API base URL is configured in `src/api/api.ts` — update it if your backend runs on a non-standard host or port. Ensure CORS is configured on the backend to allow requests from the frontend origin (e.g., `http://localhost:3000`).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Notes & tips
+------------
+- Tenant-specific themes are in `src/themes/` and applied via `TenantThemeContext`.
+- Authentication is managed with JWTs; check `src/auth` and `src/context/AuthContext.tsx` for flow details.
+- If you change API endpoints, update `src/api/api.ts`.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Contributing / local dev
+------------------------
+If you want to run both frontend and backend locally, start the backend (commonly on port 8080) and then run `npm start` from this folder. Use the app's signup/login flows to create tenants and users for testing.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+License
+-------
+See the repository root for license details (if provided).
