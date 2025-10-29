@@ -1,25 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import { TenantThemeProvider } from "./context/TenantThemeContext";
+import { Login } from "./pages/Login";
+import { Tasks } from "./pages/Tasks";
+import { Admin } from "./pages/Admin";
+import { Unauthorized } from "./pages/Unauthorized";
+import { ProtectedRoute } from "./routes/ProtectedRoute";
+import { Signup } from "./pages/Signup";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <TenantThemeProvider>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/unauthorized" element={<Unauthorized />} />
+            <Route path="/signup" element={<Signup />} />
+
+            {/* USER/ADMIN can view tasks */}
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Tasks />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Only ADMIN */}
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute requiredRole="ADMIN">
+                  <Admin />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+      </TenantThemeProvider>
+    </AuthProvider>
   );
 }
 
