@@ -7,6 +7,7 @@ import { Admin } from "./pages/Admin";
 import { Unauthorized } from "./pages/Unauthorized";
 import { ProtectedRoute } from "./routes/ProtectedRoute";
 import { Signup } from "./pages/Signup";
+import DarkProfessionalTheme from "./themes/DarkProfessionalTheme";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/admin2" element={<DarkProfessionalTheme />} />
 
             {/* USER/ADMIN can view tasks */}
             <Route

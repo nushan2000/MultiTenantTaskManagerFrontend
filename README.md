@@ -48,6 +48,22 @@ Backend integration
 -------------------
 This frontend expects a backend API (the companion `MultiTenantTaskManagerBackend` project) to be running. The API base URL is configured in `src/api/api.ts` — update it if your backend runs on a non-standard host or port. Ensure CORS is configured on the backend to allow requests from the frontend origin (e.g., `http://localhost:3000`).
 
+Tenant Themes
+-------------
+Each tenant gets their own unique theme and admin interface. Here are some examples:
+
+### Tenant 1: Dark Professional Theme
+![Dark Professional Theme](./images/Screenshot%20(177).png)
+*Professional dark theme with modern UI elements*
+
+### Tenant 2: Light Minimal Theme
+![Light Minimal Theme](./images/Screenshot%20(178).png)
+*Clean, minimal light theme focused on simplicity*
+
+### Tenant 3: Modern Glass Theme
+![Modern Glass Theme](./images/Screenshot%20(179).png)
+*Modern glass-morphism design with subtle transparency*
+
 Notes & tips
 ------------
 - Tenant-specific themes are in `src/themes/` and applied via `TenantThemeContext`.
